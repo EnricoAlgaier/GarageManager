@@ -27,8 +27,8 @@ public class ScrollBar extends JFrame {
 	private EmployeFrame employeFrame;
 	private TimeRecordingFrame timeRecordingFrame;
 	
-	public ScrollBar(MainCustomerFrame mainCustomerFrame, DatabaseConnection connectionData) {
-		this.mainCustomerFrame = mainCustomerFrame;
+	public ScrollBar(Window frame, DatabaseConnection connectionData) {
+		this.mainCustomerFrame = frame;
 	}
 	
 	public ScrollBar(GarageFrame garageFrame, DatabaseConnection connectionData) {
