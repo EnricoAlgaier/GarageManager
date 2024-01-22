@@ -10,9 +10,9 @@ public class CreateDatabaseAndTables {
 
 	public void createDatabaseAndTables() {
 		String jdbcUrl = "jdbc:mysql://localhost:3306/";
-		String username = "Enrico";
-		String password = "123456";
-
+		String username = "tester"; //Auslagern in Interface
+		String password = "123456"; // Auslagern in Interface
+		
 		String databaseName = "werkstatt";
 		String[] tableNames = { "kunden", "anschrift", "mitarbeiter", "mitarbeiter_anschrift", "repStatus", "lager",
 				"zeiterfassung", "hebebühne", "kundenFahrzeug", "auftrag" };
