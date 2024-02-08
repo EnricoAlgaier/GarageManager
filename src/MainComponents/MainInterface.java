@@ -11,13 +11,13 @@ public class MainInterface extends Window{
 	private static String windowName = "GarageManager";
 	private CButton menueButtons;
 	private ActionListenerMain actionListener;
-	protected String[] buttonName = {"Kunden", "Werkstatt", "Lager", "Termine", "Mitarbeiter", "Zeiterfassung", "Beenden"};
+	protected String[] buttonName = {"Kunden", "Werkstatt", "Lager", "Mitarbeiter", "Zeiterfassung", "Beenden"};
 	
 	public MainInterface() {
 		super(weight, height, windowName);
 		
 		actionListener = new ActionListenerMain(this);
-		menueButtons = new CButton(actionListener, 7);
+		menueButtons = new CButton(actionListener, 6);
 		
 		menueButtons.createButtons(180, 80, 120, 40, 40, "posY", buttonName, buttonName);
 		for(JButton button : menueButtons.getButtons()) {

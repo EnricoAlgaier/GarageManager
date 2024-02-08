@@ -14,10 +14,11 @@ public class DatabaseOutputTime{
 		this.scrollBar = scrollBar;
 		this.connectionData = connectionData;
 	}
+	
 
 	public void queryData() {
 		try {
-			ResultSet resultSet = connectionData.statement.executeQuery("SELECT * FROM zeiterfassung");
+			ResultSet resultSet = connectionData.statement.executeQuery("SELECT mitarbeiterID, startZeit, endzeit, datum, TIMEDIFF(endZeit, startZeit) AS gesamt FROM zeiterfassung");
 			
 			scrollBar.getTableModel().setRowCount(0);
 			

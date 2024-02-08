@@ -3,6 +3,7 @@ package Database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -33,11 +34,10 @@ public class TimeRecording {
 		int employeId = Integer.parseInt(employeID.get(0));
 
 		try {
-			connectionData.connectDatabase();
 
 			String checkQuery = "SELECT COUNT(*) FROM zeiterfassung WHERE mitarbeiterID = ? AND datum = ?";
 			PreparedStatement checkStatement = connectionData.connection.prepareStatement(checkQuery);
-			
+
 			checkStatement.setInt(1, employeId);
 			checkStatement.setDate(2, java.sql.Date.valueOf(localDateTime.toLocalDate()));
 
@@ -80,11 +80,10 @@ public class TimeRecording {
 		int employeId = Integer.parseInt(employeID.get(0));
 
 		try {
-			connectionData.connectDatabase();
 
 			String checkQuery = "SELECT COUNT(*) FROM zeiterfassung WHERE mitarbeiterID = ? AND datum = ? AND endZeit IS NULL";
 			PreparedStatement checkStatement = connectionData.connection.prepareStatement(checkQuery);
-			
+
 			checkStatement.setInt(1, employeId);
 			checkStatement.setDate(2, java.sql.Date.valueOf(localDateTime.toLocalDate()));
 
@@ -110,6 +109,7 @@ public class TimeRecording {
 				preparedStatement.executeUpdate();
 
 				close = true;
+				connectionData.closeConnection();
 
 			} catch (SQLException e) {
 				JOptionPane.showMessageDialog(null, "Nicht alle Felder ausgefüllt", "Abbruch",
@@ -117,7 +117,7 @@ public class TimeRecording {
 				System.err.println("Ein Fehler ist aufgetreten: " + e.getMessage());
 				close = false;
 			}
-			
+
 		} catch (SQLException e) {
 			close = false;
 		}

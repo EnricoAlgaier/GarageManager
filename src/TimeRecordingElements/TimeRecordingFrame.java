@@ -25,7 +25,7 @@ public class TimeRecordingFrame extends Window {
 
 	protected String[] menueButtonNames = { "starten/stoppen"};
 	protected String[] backButtonName = {"zurück"};
-	protected String[] columnNames = { "Personalnummer", "Start", "Ende", "Gesamtzeit" };
+	protected String[] columnNames = { "Personalnummer", "Start", "Ende", "Datum", "Gesamtzeit" };
 
 	public TimeRecordingFrame(String windowName) {
 		super(weight, height, windowName);
@@ -55,7 +55,7 @@ public class TimeRecordingFrame extends Window {
 
 	public void createScrollBar() {
 		connectionData.connectDatabase();
-		scrollBar.createTableTime(4, columnNames);
+		scrollBar.createTableTime(5, columnNames);
 		databaseOutput.queryData();
 	}
 	
