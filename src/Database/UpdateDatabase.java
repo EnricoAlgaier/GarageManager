@@ -10,13 +10,12 @@ import javax.annotation.processing.AbstractProcessor;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import CustomerElements.ChangeCustomer;
+import EmployeElements.ChangeEmployee;
 import GuiElements.CTextField;
 
 public class UpdateDatabase {
 	private DatabaseConnection connection;
-	private ChangeCustomer changeFrame;
-	// private OutputDatabase data;
+	private ChangeEmployee changeFrame;
 	private JTextField[] changeFields;
 	private CTextField newCustomerValue, newAddressValue, newVehicleValue, customerIdValue;
 
@@ -25,8 +24,6 @@ public class UpdateDatabase {
 	private List<String> vehicleText;
 	private List<String> customerId;
 
-
-
 	public UpdateDatabase(DatabaseConnection connection, CTextField newCustomerValue, CTextField newAddressValue,
 			CTextField newVehicleValue, CTextField customerIdValue) {
 		this.connection = connection;
@@ -34,7 +31,6 @@ public class UpdateDatabase {
 		this.newAddressValue = newAddressValue;
 		this.newVehicleValue = newVehicleValue;
 		this.customerIdValue = customerIdValue;		
-		
 	}
 
 	public void update() {

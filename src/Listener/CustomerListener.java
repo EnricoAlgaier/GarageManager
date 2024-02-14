@@ -2,11 +2,7 @@ package Listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JButton;
-
 import CustomerElements.ChangeCustomer;
 import CustomerElements.CheckCustomerId;
 import CustomerElements.CreateCustomerFrame;
@@ -17,8 +13,6 @@ import CustomerElements.DeleteCustomer;
 import Database.InputToDatabase;
 import Database.SearchDatabaseContent;
 import Database.UpdateDatabase;
-import GarageElements.GarageFrame;
-import GuiElements.CTextField;
 import MainComponents.MainInterface;
 
 public class CustomerListener implements ActionListener {
