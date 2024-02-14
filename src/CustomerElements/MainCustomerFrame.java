@@ -24,6 +24,7 @@ public class MainCustomerFrame extends Window{
 	private CButton menuButton, backButton;
 	private ScrollBar scrollBar;
 	private CTextField searchField;
+	private boolean isVisible;
 	
 	protected String[] columnNames = {"Kundennummer", "Vorname", "Nachname", "Telefonnummer"};
 	protected String[] buttonNames = {"Alles anzeigen", "Kunde hinzufügen", "Kundendaten ändern", "Kunde entfernen", "Kunde suchen"};
@@ -72,12 +73,20 @@ public class MainCustomerFrame extends Window{
 		connectionData.connectDatabase();
 		scrollBar.createTableCustomer(4, columnNames);
 		output.queryData();
+		visibleFrame();
 	}
 	
 	public void removeScrollBar() {
-		
-			scrollBar.removeScrollbar();
+			scrollBar.removeScrollbarCustomerFrame();
 			repaint();
-		
+			visibleFrame();
+	}
+	
+	private void visibleFrame() {
+		isVisible = scrollBar.getUsed();
+	}
+	
+	public boolean getVisible() {
+		return isVisible;
 	}
 }

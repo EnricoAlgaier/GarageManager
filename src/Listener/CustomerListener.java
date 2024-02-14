@@ -67,7 +67,10 @@ public class CustomerListener implements ActionListener {
 					new CreateCustomerFrame();
 
 				} else if ("Alles anzeigen".equals(buttonID)) {
-					customerMainFrame.removeScrollBar();
+					if(customerMainFrame.getVisible() == true) {
+						customerMainFrame.removeScrollBar();
+					}
+
 					customerMainFrame.createScrollBar();
 
 				} else if ("Kunde suchen".equals(buttonID)) {

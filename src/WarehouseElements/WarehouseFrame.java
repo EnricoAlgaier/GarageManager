@@ -67,4 +67,9 @@ public class WarehouseFrame extends Window{
 		scrollBar.createTableWarehouse(4, columnNames);
 		databaseOutput.queryData();
 	}
+	
+	public void removeScrollBarWarehouse() {
+		scrollBar.removeScrollbarWarehouse();
+		repaint();
+}
 }

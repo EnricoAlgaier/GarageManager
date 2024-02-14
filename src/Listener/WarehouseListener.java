@@ -42,6 +42,7 @@ public class WarehouseListener implements ActionListener {
 		String buttonID = ((JButton) e.getSource()).getActionCommand();
 
 		if ("Alle Ersatzteile anzeigen".equals(buttonID)) {
+			warehouseFrame.removeScrollBarWarehouse(); 
 			warehouseFrame.createTabel();
 
 		} else if ("Erstzteile hinzufügen".equals(buttonID)) {
