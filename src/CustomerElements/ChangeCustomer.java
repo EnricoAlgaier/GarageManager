@@ -1,11 +1,9 @@
 package CustomerElements;
 
-import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import Database.DatabaseConnection;
-import Database.InputToDatabase;
 import Database.UpdateDatabase;
 import GuiElements.CButton;
 import GuiElements.CLabel;
@@ -77,7 +75,7 @@ public class ChangeCustomer extends Window {
 		customerIDField.createTextFields(100, 300, 120, 30, 130, "posX");
 		for (JTextField textField : customerIDField.getFields()) {
 			add(textField);
-			//textField.setVisible(false);
+			textField.setVisible(false);
 		}
 
 		customerLabel.createLabels(40, 20, 120, 20, 130, "posX", customerLabelname);

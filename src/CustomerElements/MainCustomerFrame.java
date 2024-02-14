@@ -9,7 +9,6 @@ import GuiElements.CButton;
 import GuiElements.CTextField;
 import GuiElements.ScrollBar;
 import GuiElements.Window;
-import Listener.ActionListenerMain;
 import Listener.CustomerListener;
 
 public class MainCustomerFrame extends Window{
@@ -18,7 +17,6 @@ public class MainCustomerFrame extends Window{
 	
 	private DatabaseConnection connectionData;
 	private DatabaseOutputCustomer output;
-	//private ActionListenerMain actionListener;
 	private SearchDatabaseContent search;
 	private CustomerDeleteFromDatabase customerDeleteFromDatabase;
 	private CustomerListener customerListener;
@@ -74,5 +72,12 @@ public class MainCustomerFrame extends Window{
 		connectionData.connectDatabase();
 		scrollBar.createTableCustomer(4, columnNames);
 		output.queryData();
+	}
+	
+	public void removeScrollBar() {
+		
+			scrollBar.removeScrollbar();
+			repaint();
+		
 	}
 }

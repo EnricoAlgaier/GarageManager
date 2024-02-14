@@ -133,6 +133,11 @@ public class ScrollBar extends JFrame {
 		createScrollBar(true, 210, 20, 630, 350);
 		timeRecordingFrame.add(scrollBar);
 	}
+	
+	public void removeScrollbar() {
+		mainCustomerFrame.remove(scrollBar);
+		
+	}
 
 	public DefaultTableModel getTableModel() {
 		return tableModel;

@@ -67,6 +67,7 @@ public class CustomerListener implements ActionListener {
 					new CreateCustomerFrame();
 
 				} else if ("Alles anzeigen".equals(buttonID)) {
+					customerMainFrame.removeScrollBar();
 					customerMainFrame.createScrollBar();
 
 				} else if ("Kunde suchen".equals(buttonID)) {
@@ -127,12 +128,12 @@ public class CustomerListener implements ActionListener {
 		// ChangeCustomerFrame
 		if ("ändern".equals(buttonID)) {
 			System.out.println(buttonID);
-			// updateValues.setCustomerID();
 			updateValues.setCustomerID(textFieldLength);
 			updateValues.setNameTextInput(changeCustomerFrame.getNameSize());
 			updateValues.setAddressTextInput(changeCustomerFrame.getAddressSize());
 			updateValues.setVehicleTextInput(changeCustomerFrame.getVehicleSize());
 			updateValues.update();
+			changeCustomerFrame.dispose();
 
 		} else if ("zurück change".equals(buttonID)) {
 			changeCustomerFrame.dispose();
