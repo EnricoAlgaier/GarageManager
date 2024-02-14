@@ -9,5 +9,6 @@ public class MainGarage {
 		createDatabase = new CreateDatabaseAndTables();
 		createDatabase.createDatabaseAndTables();
 		new MainInterface();
+		
 	}
 }
