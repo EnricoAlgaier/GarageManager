@@ -3,6 +3,7 @@ package Listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import Database.DatabaseConnection;
 import Database.EmployeDeleteFromDatabase;
@@ -23,6 +24,8 @@ public class EmployeListener implements ActionListener {
 	private FillChangeFrame fillvalueEmployee;
 	private ChangeEmployeeFrame changeEmplyoeeFrame;
 	private UpdateEmployeeDatabase updateEmployee;
+	
+	private String messageDialog = "kein Mitarbeiter ausgewählt";
 
 	public EmployeListener(EmployeFrame employeFrame, EmployeDeleteFromDatabase deleteFromDatabase,
 			DatabaseConnection connectionData, FillChangeFrame fillvalueEmployee) {
@@ -57,6 +60,9 @@ public class EmployeListener implements ActionListener {
 			}
 
 		} else if ("Mitarbeiterdaten ändern".equals(buttonID)) {
+			if(employeFrame.getEmployeID() == 0) {
+				JOptionPane.showMessageDialog(null, messageDialog, "Info", JOptionPane.INFORMATION_MESSAGE);
+			}
 			fillvalueEmployee = new FillChangeFrame(connectionData, null);
 			fillvalueEmployee.getDatabaseValueToTextFields(employeFrame.getEmployeID());
 
@@ -88,12 +94,15 @@ public class EmployeListener implements ActionListener {
 
 		// ChangeEmployee
 		if ("change".equals(buttonID)) {
-			System.out.println(buttonID);
+			int employeID = Integer.parseInt(changeEmplyoeeFrame.getIdText());
+			
 			updateEmployee.setNameTextInput(changeEmplyoeeFrame.getNameSize());
 			updateEmployee.setAddressTextInput(changeEmplyoeeFrame.getAddressSize());
-			updateEmployee.setIdField();
+			updateEmployee.update(employeID);
 			
-			//updateEmployee.update(changeEmplyoeeFrame.get);
+			if(updateEmployee.getWindowclose() == true) {
+				changeEmplyoeeFrame.dispose();
+			}
 
 		} else if ("back".equals(buttonID)) {
 			changeEmplyoeeFrame.dispose();

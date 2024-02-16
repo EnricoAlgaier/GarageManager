@@ -30,11 +30,13 @@ public class ChangeEmployeeFrame extends Window {
 
 	private int nameTextFieldSize = 3;
 	private int addressTextFieldSize = 4;
+	private String emplyoeeID;
 
-	public ChangeEmployeeFrame(FillChangeFrame fillChangeFrame, String customerID) {
-		super(weight, height, "Kundendaten ändern von Kundennummer: " + customerID);
+	public ChangeEmployeeFrame(FillChangeFrame fillChangeFrame, String employeID) {
+		super(weight, height, "Mitarbeiter ändern von Mitarbeiter: " + employeID);
 
 		this.fillChangeFrame = fillChangeFrame;
+		this.emplyoeeID = employeID;
 
 		connectionData = new DatabaseConnection();
 
@@ -42,7 +44,7 @@ public class ChangeEmployeeFrame extends Window {
 		addressField = new CTextField(addressTextFieldSize);
 		idField = new CTextField(1);
 
-		updateEmployee = new UpdateEmployeeDatabase(connectionData, nameField, addressField, idField);
+		updateEmployee = new UpdateEmployeeDatabase(connectionData, nameField, addressField);
 		employeListener = new EmployeListener(this, updateEmployee);
 
 		customerLabel = new CLabel(nameTextFieldSize);
@@ -76,10 +78,6 @@ public class ChangeEmployeeFrame extends Window {
 			add(button);
 		}
 		
-		idField.createTextFields(40, 180, 30, 50, 0, "");
-		for(JTextField field : idField.getFields()) {
-			add(field);
-		}
 
 		setNameText();
 		setAddressText();
@@ -99,11 +97,6 @@ public class ChangeEmployeeFrame extends Window {
 		}
 	}
 	
-	public void setIdText() {
-		for (int input = 0; input < fillChangeFrame.getaddressText().size(); input++) {
-			idField.getFields()[input].setText(fillChangeFrame.getaddressText().get(input));
-		}
-	}
 
 	public int getNameSize() {
 		return nameTextFieldSize;
@@ -111,5 +104,9 @@ public class ChangeEmployeeFrame extends Window {
 
 	public int getAddressSize() {
 		return addressTextFieldSize;
+	}
+	
+	public String getIdText() {
+		return emplyoeeID;
 	}
 }

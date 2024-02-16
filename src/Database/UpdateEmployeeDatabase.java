@@ -10,20 +10,20 @@ import GuiElements.CTextField;
 
 public class UpdateEmployeeDatabase {
 	private DatabaseConnection connection;
-	private ChangeEmployeeFrame changeFrame;
-	private JTextField[] changeFields;
-	private CTextField newEmployeeValue, newAddressValue, idField;
+	private CTextField newEmployeeValue, newAddressValue;
 
 	private List<String> employeeNameText;
 	private List<String> addressText;
-	private List<String> idFieldtext;
+	
+	private boolean windowClose = false;
 
 	public UpdateEmployeeDatabase(DatabaseConnection connection, CTextField newCustomerValue,
-			CTextField newAddressValue, CTextField idField) {
+			CTextField newAddressValue) {
 		this.connection = connection;
 		this.newEmployeeValue = newCustomerValue;
 		this.newAddressValue = newAddressValue;
-		this.idField = idField;
+		
+		windowClose = false;
 	}
 
 	public void update(int employeID) {
@@ -60,16 +60,12 @@ public class UpdateEmployeeDatabase {
 
 			updateCustomerStatement.close();
 			updateAddressStatement.close();
+			
+			windowClose = true;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void setIdField() {
-		idField.textInput(1);
-		idFieldtext = new ArrayList<>();
-		idFieldtext = idField.getText();
 	}
 
 	public void setNameTextInput(int nameSize) {
@@ -82,5 +78,9 @@ public class UpdateEmployeeDatabase {
 		newAddressValue.textInput(addressSize);
 		addressText = new ArrayList<>();
 		addressText = newAddressValue.getText();
+	}
+	
+	public boolean getWindowclose() {
+		return windowClose;
 	}
 }

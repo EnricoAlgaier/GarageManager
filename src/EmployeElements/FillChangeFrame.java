@@ -5,16 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import Database.DatabaseConnection;
-import GuiElements.CTextField;
 
 public class FillChangeFrame {
 
 	private DatabaseConnection connection;
 	private ChangeEmployeeFrame employeeChangeFrame;
-
-	private boolean idValueTrue;
 
 	private List<String> employeeText;
 	private List<String> addressText;
@@ -33,8 +29,6 @@ public class FillChangeFrame {
 		try {
 
 			connection.connectDatabase();
-
-			System.out.println(employeeID);
 
 			String employee = "SELECT mitarbeiter.mitarbeiterID , mitarbeiter.vorname, mitarbeiter.nachname, mitarbeiter.telefonnummer, mitarbeiter_anschrift.plz, mitarbeiter_anschrift.ort, "
 					+ "mitarbeiter_anschrift.straße, mitarbeiter_anschrift.hausnummer " + "FROM mitarbeiter "
@@ -87,9 +81,5 @@ public class FillChangeFrame {
 	
 	public List<String> getIdText(){
 		return idText;
-	}
-
-	public ChangeEmployeeFrame getClose() {
-		return employeeChangeFrame;
 	}
 }
