@@ -7,23 +7,29 @@ import javax.swing.JButton;
 import Database.DatabaseConnection;
 import Database.EmployeDeleteFromDatabase;
 import Database.InputToDatabaseEmploye;
+import Database.UpdateEmployeeDatabase;
+import EmployeElements.ChangeEmployeeFrame;
 import EmployeElements.EmployeCreateFrame;
 import EmployeElements.EmployeFrame;
+import EmployeElements.FillChangeFrame;
 import MainComponents.MainInterface;
 
 public class EmployeListener implements ActionListener {
 	private EmployeFrame employeFrame;
-	private MainInterface mainInterface;
 	private EmployeCreateFrame employeCreateFrame;
 	private InputToDatabaseEmploye inputToDatabase;
 	private EmployeDeleteFromDatabase deleteFromDatabase;
 	private DatabaseConnection connectionData;
+	private FillChangeFrame fillvalueEmployee;
+	private ChangeEmployeeFrame changeEmplyoeeFrame;
+	private UpdateEmployeeDatabase updateEmployee;
 
 	public EmployeListener(EmployeFrame employeFrame, EmployeDeleteFromDatabase deleteFromDatabase,
-			DatabaseConnection connectionData) {
+			DatabaseConnection connectionData, FillChangeFrame fillvalueEmployee) {
 		this.employeFrame = employeFrame;
 		this.deleteFromDatabase = deleteFromDatabase;
 		this.connectionData = connectionData;
+		this.fillvalueEmployee = fillvalueEmployee;
 	}
 
 	public EmployeListener(EmployeCreateFrame employeCreateFrame, InputToDatabaseEmploye inputToDatabase,
@@ -31,6 +37,11 @@ public class EmployeListener implements ActionListener {
 		this.employeCreateFrame = employeCreateFrame;
 		this.inputToDatabase = inputToDatabase;
 		this.employeFrame = employeFrame;
+	}
+
+	public EmployeListener(ChangeEmployeeFrame changeEmplyoeeFrame, UpdateEmployeeDatabase updateEmployee) {
+		this.changeEmplyoeeFrame = changeEmplyoeeFrame;
+		this.updateEmployee = updateEmployee;
 	}
 
 	@Override
@@ -46,7 +57,8 @@ public class EmployeListener implements ActionListener {
 			}
 
 		} else if ("Mitarbeiterdaten ändern".equals(buttonID)) {
-			System.out.println(buttonID);
+			fillvalueEmployee = new FillChangeFrame(connectionData, null);
+			fillvalueEmployee.getDatabaseValueToTextFields(employeFrame.getEmployeID());
 
 		} else if ("Mitarbeiter entfernen".equals(buttonID)) {
 			deleteFromDatabase = new EmployeDeleteFromDatabase(employeFrame.getEmployeID(), connectionData);
@@ -72,6 +84,19 @@ public class EmployeListener implements ActionListener {
 
 		} else if ("close".equals(buttonID)) {
 			employeCreateFrame.dispose();
+		}
+
+		// ChangeEmployee
+		if ("change".equals(buttonID)) {
+			System.out.println(buttonID);
+			updateEmployee.setNameTextInput(changeEmplyoeeFrame.getNameSize());
+			updateEmployee.setAddressTextInput(changeEmplyoeeFrame.getAddressSize());
+			updateEmployee.setIdField();
+			
+			//updateEmployee.update(changeEmplyoeeFrame.get);
+
+		} else if ("back".equals(buttonID)) {
+			changeEmplyoeeFrame.dispose();
 		}
 	}
 }

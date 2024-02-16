@@ -10,12 +10,12 @@ import javax.annotation.processing.AbstractProcessor;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import EmployeElements.ChangeEmployee;
+import EmployeElements.ChangeEmployeeFrame;
 import GuiElements.CTextField;
 
 public class UpdateDatabase {
 	private DatabaseConnection connection;
-	private ChangeEmployee changeFrame;
+	private ChangeEmployeeFrame changeFrame;
 	private JTextField[] changeFields;
 	private CTextField newCustomerValue, newAddressValue, newVehicleValue, customerIdValue;
 

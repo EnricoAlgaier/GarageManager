@@ -34,7 +34,7 @@ public class EmployeFrame extends Window{
 		super(weight, height, windowName);
 		
 		connectionData = new DatabaseConnection();
-		emplyoeListener = new EmployeListener(this, deleteFromDatabase, connectionData);
+		emplyoeListener = new EmployeListener(this, deleteFromDatabase, connectionData, null);
 		scrollBarList = new ScrollBar(this, connectionData);
 		databaseOutput = new DatabaseOutputEmploye(scrollBarList, connectionData);
 		menuButton = new CButton(emplyoeListener, 3);

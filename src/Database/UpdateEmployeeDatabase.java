@@ -5,23 +5,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTextField;
-import EmployeElements.ChangeEmployee;
+import EmployeElements.ChangeEmployeeFrame;
 import GuiElements.CTextField;
 
 public class UpdateEmployeeDatabase {
 	private DatabaseConnection connection;
-	private ChangeEmployee changeFrame;
+	private ChangeEmployeeFrame changeFrame;
 	private JTextField[] changeFields;
-	private CTextField newEmployeeValue, newAddressValue;
+	private CTextField newEmployeeValue, newAddressValue, idField;
 
 	private List<String> employeeNameText;
 	private List<String> addressText;
+	private List<String> idFieldtext;
 
 	public UpdateEmployeeDatabase(DatabaseConnection connection, CTextField newCustomerValue,
-			CTextField newAddressValue) {
+			CTextField newAddressValue, CTextField idField) {
 		this.connection = connection;
 		this.newEmployeeValue = newCustomerValue;
 		this.newAddressValue = newAddressValue;
+		this.idField = idField;
 	}
 
 	public void update(int employeID) {
@@ -64,8 +66,10 @@ public class UpdateEmployeeDatabase {
 		}
 	}
 
-	public void setChangeField(JTextField[] changeFields) {
-		this.changeFields = changeFields;
+	public void setIdField() {
+		idField.textInput(1);
+		idFieldtext = new ArrayList<>();
+		idFieldtext = idField.getText();
 	}
 
 	public void setNameTextInput(int nameSize) {
