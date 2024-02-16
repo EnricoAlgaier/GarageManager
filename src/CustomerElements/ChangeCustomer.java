@@ -12,35 +12,36 @@ import GuiElements.Window;
 import Listener.CustomerListener;
 
 public class ChangeCustomer extends Window {
-	protected static int weight = 800;
-	protected static int height = 500;
+	private final static int weight = 800;
+	private final static int height = 500;
 
 	private DatabaseConnection connectionData;
 	private CustomerListener actionListener;
-	private CheckCustomerId checkCustomerID;
+	private FillCustomerValues fillCustomerValues;
 	private UpdateDatabase updateValues;
 
 	private CTextField nameField, addressField, vehicleField, customerIDField;
 	private CButton menueButton;
 	private CLabel customerLabel, addresslabel, vehicleLabel;
+	private String customerID;
 
-	protected String[] menueButtonName = { "ändern", "zurück" };
-	protected String[] menueButtonID = { "ändern", "zurück change" };
-	protected String[] customerLabelname = { "Vorname", "Nachname", "Telefonnummer" };
-	protected String[] addressLabelName = { "PLZ", "Ort", "Straße", "Hausnummer" };
-	protected String[] veicleLabelName = { "Fahrzeugmodell", "Tüv", "KM-Stand", "Kennzeichen" };
+	private String[] menueButtonName = { "ändern", "zurück" };
+	private String[] menueButtonID = { "ändern", "zurück change" };
+	private String[] customerLabelname = { "Vorname", "Nachname", "Telefonnummer" };
+	private String[] addressLabelName = { "PLZ", "Ort", "Straße", "Hausnummer" };
+	private String[] veicleLabelName = { "Fahrzeugmodell", "Tüv", "KM-Stand", "Kennzeichen" };
 
-	protected int nameTextFieldSize = 3;
-	protected int addressTextFieldSize = 4;
-	protected int vehicleTextFieldSize = 4;
-	protected int customerIDFieldSize = 1;
-	
+	private int nameTextFieldSize = 3;
+	private int addressTextFieldSize = 4;
+	private int vehicleTextFieldSize = 4;
+	private int customerIDFieldSize = 1;
 
-	public ChangeCustomer(CheckCustomerId checkCustomerID, String customerID) {
+	public ChangeCustomer(FillCustomerValues fillCustomerValues, String customerID) {
 		super(weight, height, "Kundendaten ändern von Kundennummer: " + customerID);
 		
-		this.checkCustomerID = checkCustomerID;
-		
+		this.customerID = customerID;
+		this.fillCustomerValues = fillCustomerValues;
+
 		connectionData = new DatabaseConnection();
 
 		nameField = new CTextField(nameTextFieldSize);
@@ -49,7 +50,7 @@ public class ChangeCustomer extends Window {
 		customerIDField = new CTextField(customerIDFieldSize);
 
 		updateValues = new UpdateDatabase(connectionData, nameField, addressField, vehicleField, customerIDField);
-		actionListener = new CustomerListener(null, null, this, null, checkCustomerID, updateValues);
+		actionListener = new CustomerListener(null, null, this, updateValues);
 
 		customerLabel = new CLabel(nameTextFieldSize);
 		addresslabel = new CLabel(addressTextFieldSize);
@@ -71,7 +72,7 @@ public class ChangeCustomer extends Window {
 		for (JTextField textField : vehicleField.getFields()) {
 			add(textField);
 		}
-		
+
 		customerIDField.createTextFields(100, 300, 120, 30, 130, "posX");
 		for (JTextField textField : customerIDField.getFields()) {
 			add(textField);
@@ -97,36 +98,30 @@ public class ChangeCustomer extends Window {
 		for (JButton button : menueButton.getButtons()) {
 			add(button);
 		}
-		
+
 		setNameText();
 		setAddressText();
 		setVehicleText();
-		setCustomerIdText();
-		
+
+
 		setVisible(true);
 	}
-	
+
 	public void setNameText() {
-		for (int input = 0; input < checkCustomerID.getcustomerText().size(); input++) {
-			nameField.getFields()[input].setText(checkCustomerID.getcustomerText().get(input));
+		for (int input = 0; input < fillCustomerValues.getcustomerText().size(); input++) {
+			nameField.getFields()[input].setText(fillCustomerValues.getcustomerText().get(input));
 		}
 	}
-	
+
 	public void setAddressText() {
-		for (int input = 0; input < checkCustomerID.getaddressText().size(); input++) {
-			addressField.getFields()[input].setText(checkCustomerID.getaddressText().get(input));
+		for (int input = 0; input < fillCustomerValues.getaddressText().size(); input++) {
+			addressField.getFields()[input].setText(fillCustomerValues.getaddressText().get(input));
 		}
 	}
-	
+
 	public void setVehicleText() {
-		for (int input = 0; input < checkCustomerID.getvehicleText().size(); input++) {
-			vehicleField.getFields()[input].setText(checkCustomerID.getvehicleText().get(input));
-		}
-	}
-	
-	public void setCustomerIdText() {
-		for (int input = 0; input < checkCustomerID.getCustomerIdText().size(); input++) {
-			customerIDField.getFields()[input].setText(checkCustomerID.getCustomerIdText().get(input));
+		for (int input = 0; input < fillCustomerValues.getvehicleText().size(); input++) {
+			vehicleField.getFields()[input].setText(fillCustomerValues.getvehicleText().get(input));
 		}
 	}
 
@@ -142,8 +137,8 @@ public class ChangeCustomer extends Window {
 		return vehicleTextFieldSize;
 	}
 	
-	public int getCustomerSize() {
-		return customerIDFieldSize;
+	public String getIdText() {
+		return customerID;
 	}
 
 }

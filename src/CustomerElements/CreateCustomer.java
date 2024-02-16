@@ -9,7 +9,7 @@ import GuiElements.CTextField;
 import GuiElements.Window;
 import Listener.CustomerListener;
 
-public class CreateCustomerFrame extends Window {
+public class CreateCustomer extends Window {
 	protected static int weight = 600;
 	protected static int height = 360;
 
@@ -31,7 +31,7 @@ public class CreateCustomerFrame extends Window {
 	protected int vehicleTextFieldSize = 4;
 	
 	
-	public CreateCustomerFrame() {
+	public CreateCustomer() {
 		super(weight, height, "Kunde Anlegen");
 		connectionData = new DatabaseConnection();
 		
@@ -40,7 +40,7 @@ public class CreateCustomerFrame extends Window {
 		carField = new CTextField(vehicleTextFieldSize);
 		
 		insertDatabase = new InputToDatabase(connectionData, nameField, addressField, carField);
-		actionListener = new CustomerListener(this, insertDatabase, null, null, null, null);
+		actionListener = new CustomerListener(this, insertDatabase, null, null);
 		
 		customerLabel = new CLabel(nameTextFieldSize);
 		addresslabel = new CLabel(addressTextFieldSize);

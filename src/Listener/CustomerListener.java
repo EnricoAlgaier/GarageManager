@@ -4,12 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import CustomerElements.ChangeCustomer;
-import CustomerElements.CheckCustomerId;
-import CustomerElements.CreateCustomerFrame;
+import CustomerElements.CreateCustomer;
 import CustomerElements.CustomerDeleteIDFrame;
 import CustomerElements.MainCustomerFrame;
-import CustomerElements.CustomerIDQuery;
 import CustomerElements.DeleteCustomer;
+import CustomerElements.FillCustomerValues;
+import Database.DatabaseConnection;
 import Database.InputToDatabase;
 import Database.SearchDatabaseContent;
 import Database.UpdateDatabase;
@@ -17,99 +17,89 @@ import MainComponents.MainInterface;
 
 public class CustomerListener implements ActionListener {
 	private InputToDatabase inputDatabase;
-	private CreateCustomerFrame createCustomerFrame;
-	private CustomerIDQuery customerIdFrame;
-	private CheckCustomerId customerIDCheck;
+	private CreateCustomer createCustomer;
 	private DeleteCustomer deleteCustomerIdCheck;
 	private ChangeCustomer changeCustomerFrame;
 	private UpdateDatabase updateValues;
 	private CustomerDeleteIDFrame customerDeleteFrame;
 	private MainCustomerFrame customerMainFrame;
 	private SearchDatabaseContent searchDatabase;
+	private FillCustomerValues fillCustomerValues;
+	private DatabaseConnection connectionData;
+
 	protected int textFieldLength = 1;
 
-	public CustomerListener(CreateCustomerFrame createCustomerFrame, InputToDatabase inputDatabase,
-			ChangeCustomer changeCustomerFrame, CustomerIDQuery customerIdFrame, CheckCustomerId customerIDCheck,
-			UpdateDatabase updateValues) {
+	public CustomerListener(CreateCustomer createCustomer, InputToDatabase inputDatabase,
+			ChangeCustomer changeCustomerFrame, UpdateDatabase updateValues) {
 
-		this.createCustomerFrame = createCustomerFrame;
+		this.createCustomer = createCustomer;
 		this.inputDatabase = inputDatabase;
-		this.customerIdFrame = customerIdFrame;
-		this.customerIDCheck = customerIDCheck;
 		this.updateValues = updateValues;
 		this.changeCustomerFrame = changeCustomerFrame;
+	}
 
+	public CustomerListener(FillCustomerValues fillCustomerValues) {
+		this.fillCustomerValues = fillCustomerValues;
 	}
 
 	public CustomerListener(CustomerDeleteIDFrame customerDeleteFrame, DeleteCustomer deleteCustomerIdCheck) {
 		this.deleteCustomerIdCheck = deleteCustomerIdCheck;
 		this.customerDeleteFrame = customerDeleteFrame;
 	}
-	
+
 	public CustomerListener(MainCustomerFrame customerMainFrame, SearchDatabaseContent searchDatabase) {
 		this.customerMainFrame = customerMainFrame;
 		this.searchDatabase = searchDatabase;
 	}
 
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String buttonID = ((JButton) e.getSource()).getActionCommand();
-		
+
 		// Customer button
-				if ("Kunde hinzufügen".equals(buttonID)) {
-					new CreateCustomerFrame();
+		if ("Kunde hinzufügen".equals(buttonID)) {
+			new CreateCustomer();
 
-				} else if ("Alles anzeigen".equals(buttonID)) {
-					if(customerMainFrame.getVisible() == true) {
-						customerMainFrame.removeScrollBar();
-					}
+		} else if ("Alles anzeigen".equals(buttonID)) {
+			if (customerMainFrame.getVisible() == true) {
+				customerMainFrame.removeScrollBar();
+			}
 
-					customerMainFrame.createScrollBar();
+			customerMainFrame.createScrollBar();
 
-				} else if ("Kunde suchen".equals(buttonID)) {
-					searchDatabase.setTextInList(1);
-					searchDatabase.searchDatabase();
+		} else if ("Kunde suchen".equals(buttonID)) {
+			searchDatabase.setTextInList(1);
+			searchDatabase.searchDatabase();
 
-				} else if ("Kunde entfernen".equals(buttonID)) {
-					new CustomerDeleteIDFrame();
+		} else if ("Kunde entfernen".equals(buttonID)) {
+			new CustomerDeleteIDFrame();
 
-				} else if ("Kundendaten ändern".equals(buttonID)) {
-					new CustomerIDQuery();
+		} else if ("Kundendaten ändern".equals(buttonID)) {
+			fillCustomerValues = new FillCustomerValues(changeCustomerFrame);
+			fillCustomerValues.getDatabaseValueToTextFields(customerMainFrame.getCustomerID());
 
-				} else if ("backCustomer".equals(buttonID)) {
-					new MainInterface();
-					customerMainFrame.dispose();
+		} else if ("backCustomer".equals(buttonID)) {
+			new MainInterface();
+			customerMainFrame.dispose();
+		}
 
-				} 
-		
 		// Customer Create Frame
 		if ("Eintragen".equals(buttonID)) {
 
-			inputDatabase.setNameTextInput(createCustomerFrame.getNameSize());
-			inputDatabase.setAddressTextInput(createCustomerFrame.getAddressSize());
-			inputDatabase.setVehicleTextInput(createCustomerFrame.getVehicleSize());
+			inputDatabase.setNameTextInput(createCustomer.getNameSize());
+			inputDatabase.setAddressTextInput(createCustomer.getAddressSize());
+			inputDatabase.setVehicleTextInput(createCustomer.getVehicleSize());
 
 			inputDatabase.insertData();
 
 			if (inputDatabase.getCloseInput() == true) {
 				customerMainFrame.createScrollBar();
-				createCustomerFrame.dispose();
+				createCustomer.dispose();
 			}
 
 		} else if ("zurück".equals(buttonID)) {
-			createCustomerFrame.dispose();
-		}
-
-		// CustomerIDFrame
-		if ("bestätigen".equals(buttonID)) {
-
-			customerIDCheck.setId(textFieldLength);
-			customerIDCheck.getDatabaseValueToTextFields();
-
-			if (customerIDCheck.getIdTrue() == true) {
-				customerIdFrame.dispose();
-			}
+			System.out.println(buttonID);
+			createCustomer.dispose();
 		}
 
 		// CustomerDelete
@@ -124,12 +114,13 @@ public class CustomerListener implements ActionListener {
 
 		// ChangeCustomerFrame
 		if ("ändern".equals(buttonID)) {
-			System.out.println(buttonID);
-			updateValues.setCustomerID(textFieldLength);
+			int customerID = Integer.parseInt(changeCustomerFrame.getIdText());
+
 			updateValues.setNameTextInput(changeCustomerFrame.getNameSize());
 			updateValues.setAddressTextInput(changeCustomerFrame.getAddressSize());
 			updateValues.setVehicleTextInput(changeCustomerFrame.getVehicleSize());
-			updateValues.update();
+			updateValues.update(customerID);
+
 			changeCustomerFrame.dispose();
 
 		} else if ("zurück change".equals(buttonID)) {

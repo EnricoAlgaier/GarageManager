@@ -33,12 +33,9 @@ public class UpdateDatabase {
 		this.customerIdValue = customerIdValue;		
 	}
 
-	public void update() {
-		System.out.println("in update");
+	public void update(int customerID) {
 	    try {
 	        connection.connectDatabase();
-	        
-	        int customerID = Integer.parseInt(customerId.get(0));
 	        
 	        String updateCustomer = "UPDATE kunden SET vorname = ?, nachname = ?, telefonnummer = ? WHERE kd_nr = " + customerID;
 	        String updateAddress = "UPDATE anschrift SET plz = ?, ort = ?, straße = ?, hausnummer = ? WHERE kd_nr = " + customerID;

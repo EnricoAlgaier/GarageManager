@@ -27,7 +27,6 @@ public class UpdateEmployeeDatabase {
 	}
 
 	public void update(int employeID) {
-		System.out.println("in update");
 		try {
 			connection.connectDatabase();
 

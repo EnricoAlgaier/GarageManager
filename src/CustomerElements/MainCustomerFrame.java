@@ -1,5 +1,8 @@
 package CustomerElements;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import Database.DatabaseConnection;
@@ -12,8 +15,8 @@ import GuiElements.Window;
 import Listener.CustomerListener;
 
 public class MainCustomerFrame extends Window{
-	protected static int weight = 1000;
-	protected static int height = 500;
+	private final static int weight = 1000;
+	private final static int height = 500;
 	
 	private DatabaseConnection connectionData;
 	private DatabaseOutputCustomer output;
@@ -25,6 +28,7 @@ public class MainCustomerFrame extends Window{
 	private ScrollBar scrollBar;
 	private CTextField searchField;
 	private boolean isVisible;
+	private int customerID;
 	
 	protected String[] columnNames = {"Kundennummer", "Vorname", "Nachname", "Telefonnummer"};
 	protected String[] buttonNames = {"Alles anzeigen", "Kunde hinzufügen", "Kundendaten ändern", "Kunde entfernen", "Kunde suchen"};
@@ -38,12 +42,9 @@ public class MainCustomerFrame extends Window{
 		
 		searchField = new CTextField(1);
 		scrollBar = new ScrollBar(this, connectionData);
-		
 		output = new DatabaseOutputCustomer(scrollBar, connectionData);
-		
 		search = new SearchDatabaseContent(connectionData, scrollBar, searchField);
 		customerDeleteFromDatabase = new CustomerDeleteFromDatabase(this);
-		
 		customerListener = new CustomerListener(this, search);
 		menuButton = new CButton(customerListener, 5);
 		backButton = new CButton(customerListener, 1);
@@ -64,6 +65,17 @@ public class MainCustomerFrame extends Window{
 		}
 		
 		createScrollBar();
+		
+		scrollBar.getDataTable().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int selectedRow = scrollBar.getDataTable().getSelectedRow();
+				if (selectedRow != -1) {
+					customerID = (int) scrollBar.getDataTable().getValueAt(selectedRow, 0);
+					System.out.println("Kundenummer: " + customerID);
+				}
+			}
+		});
 		
 		close();
 		setVisible(true);
@@ -88,5 +100,9 @@ public class MainCustomerFrame extends Window{
 	
 	public boolean getVisible() {
 		return isVisible;
+	}
+	
+	public int getCustomerID() {
+		return customerID;
 	}
 }
