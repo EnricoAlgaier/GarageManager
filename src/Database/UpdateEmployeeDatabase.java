@@ -15,7 +15,7 @@ public class UpdateEmployeeDatabase {
 	private List<String> employeeNameText;
 	private List<String> addressText;
 	
-	private boolean windowClose = false;
+	private boolean windowClose;
 
 	public UpdateEmployeeDatabase(DatabaseConnection connection, CTextField newCustomerValue,
 			CTextField newAddressValue) {

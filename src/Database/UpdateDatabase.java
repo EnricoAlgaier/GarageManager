@@ -23,6 +23,8 @@ public class UpdateDatabase {
 	private List<String> addressText;
 	private List<String> vehicleText;
 	private List<String> customerId;
+	
+	private boolean isUsed;
 
 	public UpdateDatabase(DatabaseConnection connection, CTextField newCustomerValue, CTextField newAddressValue,
 			CTextField newVehicleValue, CTextField customerIdValue) {
@@ -30,7 +32,9 @@ public class UpdateDatabase {
 		this.newCustomerValue = newCustomerValue;
 		this.newAddressValue = newAddressValue;
 		this.newVehicleValue = newVehicleValue;
-		this.customerIdValue = customerIdValue;		
+		this.customerIdValue = customerIdValue;	
+		
+		isUsed = false;
 	}
 
 	public void update(int customerID) {
@@ -80,6 +84,7 @@ public class UpdateDatabase {
 	        updateAddressStatement.close();
 	        updateVehicleStatement.close();
 	       
+	        isUsed = true;
 
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -118,5 +123,9 @@ public class UpdateDatabase {
 		customerIdValue.textInput(number);
 		customerId = new ArrayList<>();
 		customerId = customerIdValue.getText();
+	}
+	
+	public boolean getUsed() {
+		return isUsed;
 	}
 }

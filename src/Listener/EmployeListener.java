@@ -25,7 +25,7 @@ public class EmployeListener implements ActionListener {
 	private ChangeEmployeeFrame changeEmplyoeeFrame;
 	private UpdateEmployeeDatabase updateEmployee;
 	
-	private String messageDialog = "kein Mitarbeiter ausgewählt";
+	private String informationText = "kein Mitarbeiter ausgewählt";
 
 	public EmployeListener(EmployeFrame employeFrame, EmployeDeleteFromDatabase deleteFromDatabase,
 			DatabaseConnection connectionData, FillChangeFrame fillvalueEmployee) {
@@ -61,7 +61,7 @@ public class EmployeListener implements ActionListener {
 
 		} else if ("Mitarbeiterdaten ändern".equals(buttonID)) {
 			if(employeFrame.getEmployeID() == 0) {
-				JOptionPane.showMessageDialog(null, messageDialog, "Info", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, informationText, "Info", JOptionPane.INFORMATION_MESSAGE);
 			}
 			fillvalueEmployee = new FillChangeFrame(connectionData, null);
 			fillvalueEmployee.getDatabaseValueToTextFields(employeFrame.getEmployeID());
@@ -101,6 +101,7 @@ public class EmployeListener implements ActionListener {
 			updateEmployee.update(employeID);
 			
 			if(updateEmployee.getWindowclose() == true) {
+				JOptionPane.showMessageDialog(null, "Erfolgreich geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
 				changeEmplyoeeFrame.dispose();
 			}
 

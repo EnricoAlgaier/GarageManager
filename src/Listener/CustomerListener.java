@@ -3,6 +3,8 @@ package Listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
 import CustomerElements.ChangeCustomer;
 import CustomerElements.CreateCustomer;
 import CustomerElements.CustomerDeleteIDFrame;
@@ -26,6 +28,8 @@ public class CustomerListener implements ActionListener {
 	private SearchDatabaseContent searchDatabase;
 	private FillCustomerValues fillCustomerValues;
 	private DatabaseConnection connectionData;
+	
+	private String informationText = "Keine Kunde ausgewählt";
 
 	protected int textFieldLength = 1;
 
@@ -75,6 +79,10 @@ public class CustomerListener implements ActionListener {
 			new CustomerDeleteIDFrame();
 
 		} else if ("Kundendaten ändern".equals(buttonID)) {
+			if(customerMainFrame.getCustomerID() == 0) {
+				JOptionPane.showMessageDialog(null, informationText, "Info", JOptionPane.INFORMATION_MESSAGE);
+			}
+			
 			fillCustomerValues = new FillCustomerValues(changeCustomerFrame);
 			fillCustomerValues.getDatabaseValueToTextFields(customerMainFrame.getCustomerID());
 
@@ -115,13 +123,16 @@ public class CustomerListener implements ActionListener {
 		// ChangeCustomerFrame
 		if ("ändern".equals(buttonID)) {
 			int customerID = Integer.parseInt(changeCustomerFrame.getIdText());
-
+			
 			updateValues.setNameTextInput(changeCustomerFrame.getNameSize());
 			updateValues.setAddressTextInput(changeCustomerFrame.getAddressSize());
 			updateValues.setVehicleTextInput(changeCustomerFrame.getVehicleSize());
 			updateValues.update(customerID);
 
-			changeCustomerFrame.dispose();
+			if (updateValues.getUsed() == true) {
+				JOptionPane.showMessageDialog(null, "Erfolgreich geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
+				changeCustomerFrame.dispose();
+			}
 
 		} else if ("zurück change".equals(buttonID)) {
 			changeCustomerFrame.dispose();

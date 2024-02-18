@@ -12,8 +12,8 @@ import GuiElements.Window;
 import Listener.EmployeListener;
 
 public class ChangeEmployeeFrame extends Window {
-	protected static int weight = 800;
-	protected static int height = 500;
+	private final static int weight = 800;
+	private final static int height = 500;
 
 	private DatabaseConnection connectionData;
 	private EmployeListener employeListener;
