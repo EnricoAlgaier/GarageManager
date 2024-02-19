@@ -55,10 +55,6 @@ public class EmployeListener implements ActionListener {
 		if ("Mitarbeiter hinzufügen".equals(buttonID)) {
 			new EmployeCreateFrame(buttonID);
 
-			if (inputToDatabase.getCloseInput() == true) {
-				employeFrame.createOrderList();
-			}
-
 		} else if ("Mitarbeiterdaten ändern".equals(buttonID)) {
 			if(employeFrame.getEmployeID() == 0) {
 				JOptionPane.showMessageDialog(null, informationText, "Info", JOptionPane.INFORMATION_MESSAGE);

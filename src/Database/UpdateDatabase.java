@@ -41,13 +41,14 @@ public class UpdateDatabase {
 	    try {
 	        connection.connectDatabase();
 	        
-	        String updateCustomer = "UPDATE kunden SET vorname = ?, nachname = ?, telefonnummer = ? WHERE kd_nr = " + customerID;
+	        String updateCustomer = "UPDATE kunden SET vorname = ?, nachname = ?, telefonnummer = ?, email_address = ? WHERE kd_nr = " + customerID;
 	        String updateAddress = "UPDATE anschrift SET plz = ?, ort = ?, straße = ?, hausnummer = ? WHERE kd_nr = " + customerID;
 	        String updateVehicle = "UPDATE kundenfahrzeug SET fahrzeug = ?, tüv = ?, km_stand = ?, kennzeichen = ? WHERE kd_nr = " + customerID;
 
 	        String vorname = customerText.get(0);
 	        String nachname = customerText.get(1);
 	        String telefonnummer = customerText.get(2);
+	        String email = customerText.get(3);
 
 	        String plz = addressText.get(0);
 	        String ort = addressText.get(1);
@@ -64,6 +65,7 @@ public class UpdateDatabase {
 	        updateCustomerStatement.setString(1, vorname);
 	        updateCustomerStatement.setString(2, nachname);
 	        updateCustomerStatement.setString(3, telefonnummer);
+	        updateCustomerStatement.setString(4, email);
 	        updateCustomerStatement.executeUpdate();
 
 	        PreparedStatement updateAddressStatement = connection.connection.prepareStatement(updateAddress);

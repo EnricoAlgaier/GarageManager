@@ -2,7 +2,7 @@ package CustomerElements;
 
 import javax.swing.*;
 import Database.DatabaseConnection;
-import Database.InputToDatabase;
+import Database.InputToDatabaseCustomer;
 import GuiElements.CButton;
 import GuiElements.CLabel;
 import GuiElements.CTextField;
@@ -19,14 +19,14 @@ public class CreateCustomer extends Window {
 	private CTextField nameField, addressField, carField;
 	private CButton menueButton;
 	private CLabel customerLabel, addresslabel, vehicleLabel;
-	private InputToDatabase insertDatabase;
+	private InputToDatabaseCustomer insertDatabase;
 	
 	protected String[] menueButtonName = { "Eintragen", "zurück" };
-	protected String[] customerLabelname = {"Vorname", "Nachname", "Telefonnummer"};
+	protected String[] customerLabelname = {"Vorname", "Nachname", "Telefonnummer", "E-Mail"};
 	protected String[] addressLabelName = {"PLZ", "Ort", "Straße", "Hausnummer"};
 	protected String[] veicleLabelName = {"Fahrzeugmodell", "Tüv", "KM-Stand", "Kennzeichen"};
 	
-	protected int nameTextFieldSize = 3;
+	protected int nameTextFieldSize = 4;
 	protected int addressTextFieldSize = 4;
 	protected int vehicleTextFieldSize = 4;
 	
@@ -39,7 +39,7 @@ public class CreateCustomer extends Window {
 		addressField = new CTextField(addressTextFieldSize);
 		carField = new CTextField(vehicleTextFieldSize);
 		
-		insertDatabase = new InputToDatabase(connectionData, nameField, addressField, carField);
+		insertDatabase = new InputToDatabaseCustomer(connectionData, nameField, addressField, carField);
 		actionListener = new CustomerListener(this, insertDatabase, null, null);
 		
 		customerLabel = new CLabel(nameTextFieldSize);

@@ -10,7 +10,7 @@ import javax.annotation.processing.AbstractProcessor;
 import javax.swing.JOptionPane;
 import GuiElements.CTextField;
 
-public class InputToDatabase {
+public class InputToDatabaseCustomer {
 	private DatabaseConnection connectionData;
 	private CTextField nameText, addresstext, vehiclesText;
 	private List<String> customerText;
@@ -18,7 +18,7 @@ public class InputToDatabase {
 	private List<String> vehicleText;
 	private boolean closeInput;
 
-	public InputToDatabase(DatabaseConnection connectionData, CTextField nameText, CTextField addresstext,
+	public InputToDatabaseCustomer(DatabaseConnection connectionData, CTextField nameText, CTextField addresstext,
 			CTextField vehiclesText) {
 		this.connectionData = connectionData;
 		this.nameText = nameText;
@@ -31,7 +31,7 @@ public class InputToDatabase {
 		try {
 			connectionData.connectDatabase();
 
-			String insertQuery1 = "INSERT INTO kunden (vorname, nachname, telefonnummer) VALUES (?, ?, ?)";
+			String insertQuery1 = "INSERT INTO kunden (vorname, nachname, telefonnummer, email_address) VALUES (?, ?, ?, ?)";
 			String insertQuery2 = "INSERT INTO anschrift (plz, ort, straße, hausnummer) VALUES (?, ?, ?, ?)";
 			String insertQuery3 = "INSERT INTO kundenfahrzeug (fahrzeug, tüv, km_stand, kennzeichen) VALUES (?, ?, ?, ?)";
 
@@ -50,6 +50,7 @@ public class InputToDatabase {
 				preparedStatement1.setString(1, customerText.get(0));
 				preparedStatement1.setString(2, customerText.get(1));
 				preparedStatement1.setString(3, customerText.get(2));
+				preparedStatement1.setString(4, customerText.get(3));
 				preparedStatement1.executeUpdate();
 
 				preparedStatement2.setString(1, addressText.get(0));

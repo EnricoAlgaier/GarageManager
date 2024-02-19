@@ -12,13 +12,13 @@ import CustomerElements.MainCustomerFrame;
 import CustomerElements.DeleteCustomer;
 import CustomerElements.FillCustomerValues;
 import Database.DatabaseConnection;
-import Database.InputToDatabase;
+import Database.InputToDatabaseCustomer;
 import Database.SearchDatabaseContent;
 import Database.UpdateDatabase;
 import MainComponents.MainInterface;
 
 public class CustomerListener implements ActionListener {
-	private InputToDatabase inputDatabase;
+	private InputToDatabaseCustomer inputDatabase;
 	private CreateCustomer createCustomer;
 	private DeleteCustomer deleteCustomerIdCheck;
 	private ChangeCustomer changeCustomerFrame;
@@ -33,7 +33,7 @@ public class CustomerListener implements ActionListener {
 
 	protected int textFieldLength = 1;
 
-	public CustomerListener(CreateCustomer createCustomer, InputToDatabase inputDatabase,
+	public CustomerListener(CreateCustomer createCustomer, InputToDatabaseCustomer inputDatabase,
 			ChangeCustomer changeCustomerFrame, UpdateDatabase updateValues) {
 
 		this.createCustomer = createCustomer;
@@ -101,7 +101,6 @@ public class CustomerListener implements ActionListener {
 			inputDatabase.insertData();
 
 			if (inputDatabase.getCloseInput() == true) {
-				customerMainFrame.createScrollBar();
 				createCustomer.dispose();
 			}
 

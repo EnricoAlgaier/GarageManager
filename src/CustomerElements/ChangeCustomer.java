@@ -27,11 +27,11 @@ public class ChangeCustomer extends Window {
 
 	private String[] menueButtonName = { "ändern", "zurück" };
 	private String[] menueButtonID = { "ändern", "zurück change" };
-	private String[] customerLabelname = { "Vorname", "Nachname", "Telefonnummer" };
+	private String[] customerLabelname = { "Vorname", "Nachname", "Telefonnummer", "E-Mail" };
 	private String[] addressLabelName = { "PLZ", "Ort", "Straße", "Hausnummer" };
 	private String[] veicleLabelName = { "Fahrzeugmodell", "Tüv", "KM-Stand", "Kennzeichen" };
 
-	private int nameTextFieldSize = 3;
+	private int nameTextFieldSize = 4;
 	private int addressTextFieldSize = 4;
 	private int vehicleTextFieldSize = 4;
 	private int customerIDFieldSize = 1;

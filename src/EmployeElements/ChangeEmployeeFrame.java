@@ -25,10 +25,10 @@ public class ChangeEmployeeFrame extends Window {
 
 	private String[] menueButtonName = { "ändern", "zurück" };
 	private String[] menueButtonID = { "change", "back" };
-	private String[] customerLabelname = { "Vorname", "Nachname", "Telefonnummer" };
+	private String[] customerLabelname = { "Vorname", "Nachname", "Telefonnummer", "E-Mail" };
 	private String[] addressLabelName = { "PLZ", "Ort", "Straße", "Hausnummer" };
 
-	private int nameTextFieldSize = 3;
+	private int nameTextFieldSize = 4;
 	private int addressTextFieldSize = 4;
 	private String emplyoeeID;
 

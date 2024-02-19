@@ -28,7 +28,7 @@ public class InputToDatabaseEmploye {
 		try {
 			connectionData.connectDatabase();
 
-			String insertQuery1 = "INSERT INTO mitarbeiter (mitarbeiterID, vorname, nachname, telefonnummer) VALUES (?, ?, ?, ?)";
+			String insertQuery1 = "INSERT INTO mitarbeiter (mitarbeiterID, vorname, nachname, telefonnummer, email_address) VALUES (?, ?, ?, ?, ?)";
 			String insertQuery2 = "INSERT INTO mitarbeiter_anschrift (mitarbeiterID, plz, ort, straße, hausnummer) VALUES (?, ?, ?, ?, ?)";
 
 			PreparedStatement preparedStatement1 = connectionData.connection.prepareStatement(insertQuery1);
@@ -46,6 +46,7 @@ public class InputToDatabaseEmploye {
 				preparedStatement1.setString(2, employeName.get(1));
 				preparedStatement1.setString(3, employeName.get(2));
 				preparedStatement1.setString(4, employeName.get(3));
+				preparedStatement1.setString(5, employeName.get(4));
 				preparedStatement1.executeUpdate();
 
 				preparedStatement2.setInt(1, employeID);

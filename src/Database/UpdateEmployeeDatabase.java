@@ -30,7 +30,7 @@ public class UpdateEmployeeDatabase {
 		try {
 			connection.connectDatabase();
 
-			String updateEmployee = "UPDATE mitarbeiter SET vorname = ?, nachname = ?, telefonnummer = ? WHERE mitarbeiterID = "
+			String updateEmployee = "UPDATE mitarbeiter SET vorname = ?, nachname = ?, telefonnummer = ?, email_address = ? WHERE mitarbeiterID = "
 					+ employeID;
 			String updateEmplyeeAddress = "UPDATE mitarbeiter_anschrift SET plz = ?, ort = ?, straße = ?, hausnummer = ? WHERE mitarbeiterID = "
 					+ employeID;
@@ -38,6 +38,7 @@ public class UpdateEmployeeDatabase {
 			String vorname = employeeNameText.get(0);
 			String nachname = employeeNameText.get(1);
 			String telefonnummer = employeeNameText.get(2);
+			String email = employeeNameText.get(3);
 
 			String plz = addressText.get(0);
 			String ort = addressText.get(1);
@@ -48,6 +49,7 @@ public class UpdateEmployeeDatabase {
 			updateCustomerStatement.setString(1, vorname);
 			updateCustomerStatement.setString(2, nachname);
 			updateCustomerStatement.setString(3, telefonnummer);
+			updateCustomerStatement.setString(4, email);
 			updateCustomerStatement.executeUpdate();
 
 			PreparedStatement updateAddressStatement = connection.connection.prepareStatement(updateEmplyeeAddress);

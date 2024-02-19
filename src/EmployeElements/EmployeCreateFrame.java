@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import Database.DatabaseConnection;
-import Database.InputToDatabase;
+import Database.InputToDatabaseCustomer;
 import Database.InputToDatabaseEmploye;
 import GuiElements.CButton;
 import GuiElements.CLabel;
@@ -14,7 +14,7 @@ import GuiElements.Window;
 import Listener.EmployeListener;
 
 public class EmployeCreateFrame extends Window{
-	protected static int weight = 600;
+	protected static int weight = 700;
 	protected static int height = 300;
 	
 	private DatabaseConnection connectionData;
@@ -27,11 +27,11 @@ public class EmployeCreateFrame extends Window{
 	
 	protected String[] menueButtonName = { "Eintragen", "zurück" };
 	protected String[] menueButtonID = { "add", "close" };
-	protected String[] customerLabelname = {"Personalnummer", "Vorname", "Nachname", "Telefonnummer"};
+	protected String[] customerLabelname = {"Personalnummer", "Vorname", "Nachname", "Telefonnummer", "E-Mail"};
 	protected String[] addressLabelName = {"PLZ", "Ort", "Straße", "Hausnummer"};
 	protected String[] veicleLabelName = {"Fahrzeugmodell", "Tüv", "KM-Stand"};
 	
-	protected int nameTextFieldSize = 4;
+	protected int nameTextFieldSize = 5;
 	protected int addressTextFieldSize = 4;
 	
 	public EmployeCreateFrame(String windowName) {

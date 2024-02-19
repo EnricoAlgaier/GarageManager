@@ -52,7 +52,7 @@ public class CreateDatabaseAndTables {
 
 		case "kunden":
 			statement.executeUpdate("CREATE TABLE IF NOT EXISTS kunden (" + "kd_nr INT AUTO_INCREMENT PRIMARY KEY,"
-					+ "vorname VARCHAR(50)," + "nachname VARCHAR(50)," + "telefonnummer INTEGER)");
+					+ "vorname VARCHAR(50)," + "nachname VARCHAR(50)," + "telefonnummer INTEGER)" + "email_address VARCHAR(50))");
 			break;
 
 		case "anschrift":
@@ -63,7 +63,7 @@ public class CreateDatabaseAndTables {
 
 		case "mitarbeiter":
 			statement.executeUpdate("CREATE TABLE IF NOT EXISTS mitarbeiter (" + "mitarbeiterID INTEGER PRIMARY KEY,"
-					+ "vorname VARCHAR(50)," + "nachname VARCHAR(50)," + "telefonnummer VARCHAR(50))");
+					+ "vorname VARCHAR(50)," + "nachname VARCHAR(50)," + "telefonnummer VARCHAR(50)" + "email_address VARChAR(50)");
 			break;
 
 		case "mitarbeiter_anschrift":
