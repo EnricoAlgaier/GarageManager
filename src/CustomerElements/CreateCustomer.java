@@ -15,6 +15,7 @@ public class CreateCustomer extends Window {
 
 	private DatabaseConnection connectionData;
 	private CustomerListener actionListener;
+	private MainCustomerFrame mainCustomerFrame;
 
 	private CTextField nameField, addressField, carField;
 	private CButton menueButton;
@@ -31,8 +32,10 @@ public class CreateCustomer extends Window {
 	protected int vehicleTextFieldSize = 4;
 	
 	
-	public CreateCustomer() {
+	public CreateCustomer(MainCustomerFrame mainCustomerFrame) {
 		super(weight, height, "Kunde Anlegen");
+		this.mainCustomerFrame = mainCustomerFrame;
+		
 		connectionData = new DatabaseConnection();
 		
 		nameField = new CTextField(nameTextFieldSize);
@@ -40,7 +43,7 @@ public class CreateCustomer extends Window {
 		carField = new CTextField(vehicleTextFieldSize);
 		
 		insertDatabase = new InputToDatabaseCustomer(connectionData, nameField, addressField, carField);
-		actionListener = new CustomerListener(this, insertDatabase, null, null);
+		actionListener = new CustomerListener(mainCustomerFrame, insertDatabase, null, null);
 		
 		customerLabel = new CLabel(nameTextFieldSize);
 		addresslabel = new CLabel(addressTextFieldSize);

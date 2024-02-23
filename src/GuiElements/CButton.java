@@ -4,6 +4,7 @@ import Design.CustomButtonRect;
 import Listener.ActionListenerMain;
 import Listener.CustomerListener;
 import Listener.EmployeListener;
+import Listener.LoginListener;
 import Listener.OrdersListener;
 import Listener.TimeListener;
 import Listener.WarehouseListener;
@@ -15,6 +16,7 @@ public class CButton {
 	private WarehouseListener warehouseListener;
 	private EmployeListener employeListener;
 	private TimeListener timeListener;
+	private LoginListener loginListener;
 	private CustomButtonRect[] buttons;
 	
 	private int number;
@@ -54,6 +56,12 @@ public class CButton {
 	
 	public CButton(TimeListener timeListener,  int number) {
 		this.timeListener = timeListener;
+		this.number = number;
+		buttons = new CustomButtonRect[number];
+	}
+	
+	public CButton(LoginListener loginListener,  int number) {
+		this.loginListener = loginListener;
 		this.number = number;
 		buttons = new CustomButtonRect[number];
 	}
@@ -150,6 +158,23 @@ public class CButton {
 			buttons[create].setBounds(posX, posY, weight, height);
 			buttons[create].setActionCommand(buttonID[create]);
 			buttons[create].addActionListener(timeListener);
+			buttons[create].setFocusPainted(false);
+			
+			if(position.equals("posX")) {
+				posX += distance;
+			}
+			else if(position.equals("posY")) {
+				posY += distance;
+			}
+		}
+	}
+	
+	public void createButtonsLogin(int posX, int posY, int weight, int height, int distance, String position, String[] buttonID, String[] buttonName){
+		for(int create = 0; create < number; create++) {
+			buttons[create] = new CustomButtonRect(color1, color2, buttonName[create]);
+			buttons[create].setBounds(posX, posY, weight, height);
+			buttons[create].setActionCommand(buttonID[create]);
+			buttons[create].addActionListener(loginListener);
 			buttons[create].setFocusPainted(false);
 			
 			if(position.equals("posX")) {

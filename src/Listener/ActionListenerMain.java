@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import AppointmentElements.AppointmentFrame;
 import CustomerElements.MainCustomerFrame;
+import DatabaseLogin.DatabaseLoginFrame;
 import EmployeElements.EmployeFrame;
 import GarageElements.GarageFrame;
 import MainComponents.MainInterface;
@@ -54,6 +55,11 @@ public class ActionListenerMain implements ActionListener {
 
 		} else if ("Beenden".equals(buttonID)) {
 			System.exit(0);
+		} 
+		
+		if("login".equals(buttonID)) {
+			new DatabaseLoginFrame();
+			
 		}
 		
 		if("backGarage".equals(buttonID)) {

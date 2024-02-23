@@ -33,10 +33,10 @@ public class CustomerListener implements ActionListener {
 
 	protected int textFieldLength = 1;
 
-	public CustomerListener(CreateCustomer createCustomer, InputToDatabaseCustomer inputDatabase,
+	public CustomerListener(MainCustomerFrame customerMainFrame, InputToDatabaseCustomer inputDatabase,
 			ChangeCustomer changeCustomerFrame, UpdateDatabase updateValues) {
 
-		this.createCustomer = createCustomer;
+		this.customerMainFrame = customerMainFrame;
 		this.inputDatabase = inputDatabase;
 		this.updateValues = updateValues;
 		this.changeCustomerFrame = changeCustomerFrame;
@@ -56,13 +56,14 @@ public class CustomerListener implements ActionListener {
 		this.searchDatabase = searchDatabase;
 	}
 
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String buttonID = ((JButton) e.getSource()).getActionCommand();
 
 		// Customer button
 		if ("Kunde hinzufügen".equals(buttonID)) {
-			new CreateCustomer();
+			customerMainFrame.createCustomerCreateFrame();
 
 		} else if ("Alles anzeigen".equals(buttonID)) {
 			if (customerMainFrame.getVisible() == true) {
@@ -94,14 +95,16 @@ public class CustomerListener implements ActionListener {
 		// Customer Create Frame
 		if ("Eintragen".equals(buttonID)) {
 
-			inputDatabase.setNameTextInput(createCustomer.getNameSize());
-			inputDatabase.setAddressTextInput(createCustomer.getAddressSize());
-			inputDatabase.setVehicleTextInput(createCustomer.getVehicleSize());
+			inputDatabase.setNameTextInput(customerMainFrame.getCreateFrame().getNameSize());
+			inputDatabase.setAddressTextInput(customerMainFrame.getCreateFrame().getAddressSize());
+			inputDatabase.setVehicleTextInput(customerMainFrame.getCreateFrame().getVehicleSize());
 
 			inputDatabase.insertData();
 
 			if (inputDatabase.getCloseInput() == true) {
-				createCustomer.dispose();
+				customerMainFrame.removeScrollBar();
+				customerMainFrame.createScrollBar();
+				customerMainFrame.getCreateFrame().dispose();
 			}
 
 		} else if ("zurück".equals(buttonID)) {

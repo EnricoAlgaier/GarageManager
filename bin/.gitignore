@@ -1,7 +1,11 @@
-/MainComponents/
-/CustomerElements/
-/Listener/
-/GuiElements/
-/WarehouseElements/
-/EmployeElements/
 /Database/
+/DatabaseLogin/
+/Design/
+/EmployeElements/
+/GarageElements/
+/GuiElements/
+/Listener/
+/MainComponents/
+/TimeRecordingElements/
+/WarehouseElements/
+/CustomerElements/

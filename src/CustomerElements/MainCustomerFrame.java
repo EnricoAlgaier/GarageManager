@@ -23,6 +23,7 @@ public class MainCustomerFrame extends Window{
 	private SearchDatabaseContent search;
 	private CustomerDeleteFromDatabase customerDeleteFromDatabase;
 	private CustomerListener customerListener;
+	private CreateCustomer createCustomer;
 	
 	private CButton menuButton, backButton;
 	private ScrollBar scrollBar;
@@ -48,6 +49,8 @@ public class MainCustomerFrame extends Window{
 		customerListener = new CustomerListener(this, search);
 		menuButton = new CButton(customerListener, 5);
 		backButton = new CButton(customerListener, 1);
+		
+		
 		
 		menuButton.createButtonsCustomer(20, 20, 160, 40, 40, "posY", buttonNames, buttonNames);
 		for(JButton button : menuButton.getButtons()) {
@@ -81,6 +84,14 @@ public class MainCustomerFrame extends Window{
 		setVisible(true);
 	}
 	
+	public void createCustomerCreateFrame() {
+		createCustomer = new CreateCustomer(this);
+	}
+	
+	public CreateCustomer getCreateFrame() {
+		return createCustomer;
+	}
+	
 	public void createScrollBar() {
 		connectionData.connectDatabase();
 		scrollBar.createTableCustomer(4, columnNames);
@@ -105,4 +116,5 @@ public class MainCustomerFrame extends Window{
 	public int getCustomerID() {
 		return customerID;
 	}
+	
 }
