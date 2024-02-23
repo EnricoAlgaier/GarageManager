@@ -24,6 +24,7 @@ public class MainCustomerFrame extends Window{
 	private CustomerDeleteFromDatabase customerDeleteFromDatabase;
 	private CustomerListener customerListener;
 	private CreateCustomer createCustomer;
+	private CustomerDeleteIDFrame customerDeleteFrame;
 	
 	private CButton menuButton, backButton;
 	private ScrollBar scrollBar;
@@ -84,14 +85,6 @@ public class MainCustomerFrame extends Window{
 		setVisible(true);
 	}
 	
-	public void createCustomerCreateFrame() {
-		createCustomer = new CreateCustomer(this);
-	}
-	
-	public CreateCustomer getCreateFrame() {
-		return createCustomer;
-	}
-	
 	public void createScrollBar() {
 		connectionData.connectDatabase();
 		scrollBar.createTableCustomer(4, columnNames);
@@ -109,6 +102,28 @@ public class MainCustomerFrame extends Window{
 		isVisible = scrollBar.getUsed();
 	}
 	
+	public void updateScrollBar() {
+		removeScrollBar();
+		createScrollBar();
+	}
+	
+	public void createCustomerCreateFrame() {
+		createCustomer = new CreateCustomer(this);
+	}
+	
+	public CreateCustomer getCreateFrame() {
+		return createCustomer;
+	}
+	
+	public void deleteCustomer() {
+		customerDeleteFrame = new CustomerDeleteIDFrame(this);
+	}
+	
+	public CustomerDeleteIDFrame getdeleteFrame() {
+		return customerDeleteFrame;
+	}
+	
+	
 	public boolean getVisible() {
 		return isVisible;
 	}
@@ -116,5 +131,4 @@ public class MainCustomerFrame extends Window{
 	public int getCustomerID() {
 		return customerID;
 	}
-	
 }

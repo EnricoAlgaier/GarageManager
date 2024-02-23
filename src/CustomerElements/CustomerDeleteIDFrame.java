@@ -22,20 +22,21 @@ public class CustomerDeleteIDFrame extends Window{
 	private CButton confirmButton;
 	private DatabaseConnection connectionData;
 	private DeleteCustomer deleteCustomerIdCheck;
+	private MainCustomerFrame mainCustomerFrame;
 	
 	protected String[] customerIdLabelName = {"Kundennummer"};
 	protected String[] confirmButtonName = {"bestätigen"};
 	protected String[] confirmButtonId = {"confirm"};
 	
 	
-	public CustomerDeleteIDFrame() {
+	public CustomerDeleteIDFrame(MainCustomerFrame mainCustomerFrame) {
 		super(weight, height, windowName);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.mainCustomerFrame = mainCustomerFrame;
 		
 		connectionData = new DatabaseConnection();
 		customerIdField = new CTextField(1);
 		deleteCustomerIdCheck= new DeleteCustomer(connectionData, customerIdField);
-		actionListener = new CustomerListener(this, deleteCustomerIdCheck);
+		actionListener = new CustomerListener(mainCustomerFrame, deleteCustomerIdCheck);
 		customerId = new CLabel(1);
 		
 		confirmButton = new CButton(actionListener, 1);
@@ -55,6 +56,7 @@ public class CustomerDeleteIDFrame extends Window{
 			add(button);
 		}
 		
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
 }

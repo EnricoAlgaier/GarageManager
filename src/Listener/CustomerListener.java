@@ -46,9 +46,9 @@ public class CustomerListener implements ActionListener {
 		this.fillCustomerValues = fillCustomerValues;
 	}
 
-	public CustomerListener(CustomerDeleteIDFrame customerDeleteFrame, DeleteCustomer deleteCustomerIdCheck) {
+	public CustomerListener(MainCustomerFrame customerMainFrame, DeleteCustomer deleteCustomerIdCheck) {
+		this.customerMainFrame = customerMainFrame;
 		this.deleteCustomerIdCheck = deleteCustomerIdCheck;
-		this.customerDeleteFrame = customerDeleteFrame;
 	}
 
 	public CustomerListener(MainCustomerFrame customerMainFrame, SearchDatabaseContent searchDatabase) {
@@ -77,14 +77,14 @@ public class CustomerListener implements ActionListener {
 			searchDatabase.searchDatabase();
 
 		} else if ("Kunde entfernen".equals(buttonID)) {
-			new CustomerDeleteIDFrame();
+			customerMainFrame.deleteCustomer();
 
 		} else if ("Kundendaten ändern".equals(buttonID)) {
 			if(customerMainFrame.getCustomerID() == 0) {
 				JOptionPane.showMessageDialog(null, informationText, "Info", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
-			fillCustomerValues = new FillCustomerValues(changeCustomerFrame);
+			fillCustomerValues = new FillCustomerValues(changeCustomerFrame, customerMainFrame);
 			fillCustomerValues.getDatabaseValueToTextFields(customerMainFrame.getCustomerID());
 
 		} else if ("backCustomer".equals(buttonID)) {
@@ -102,8 +102,7 @@ public class CustomerListener implements ActionListener {
 			inputDatabase.insertData();
 
 			if (inputDatabase.getCloseInput() == true) {
-				customerMainFrame.removeScrollBar();
-				customerMainFrame.createScrollBar();
+				customerMainFrame.updateScrollBar();
 				customerMainFrame.getCreateFrame().dispose();
 			}
 
@@ -118,7 +117,8 @@ public class CustomerListener implements ActionListener {
 			deleteCustomerIdCheck.checkID();
 
 			if (deleteCustomerIdCheck.getClose() == true) {
-				customerDeleteFrame.dispose();
+				customerMainFrame.updateScrollBar();
+				customerMainFrame.getdeleteFrame().dispose();
 			}
 		}
 
@@ -132,6 +132,7 @@ public class CustomerListener implements ActionListener {
 			updateValues.update(customerID);
 
 			if (updateValues.getUsed() == true) {
+				customerMainFrame.updateScrollBar();
 				JOptionPane.showMessageDialog(null, "Erfolgreich geändert", "Info", JOptionPane.INFORMATION_MESSAGE);
 				changeCustomerFrame.dispose();
 			}

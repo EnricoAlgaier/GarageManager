@@ -19,6 +19,7 @@ public class ChangeCustomer extends Window {
 	private CustomerListener actionListener;
 	private FillCustomerValues fillCustomerValues;
 	private UpdateDatabase updateValues;
+	private MainCustomerFrame mainCustomerFrame;
 
 	private CTextField nameField, addressField, vehicleField, customerIDField;
 	private CButton menueButton;
@@ -36,11 +37,12 @@ public class ChangeCustomer extends Window {
 	private int vehicleTextFieldSize = 4;
 	private int customerIDFieldSize = 1;
 
-	public ChangeCustomer(FillCustomerValues fillCustomerValues, String customerID) {
+	public ChangeCustomer(FillCustomerValues fillCustomerValues, String customerID, MainCustomerFrame mainCustomerFrame) {
 		super(weight, height, "Kundendaten ändern von Kundennummer: " + customerID);
 		
 		this.customerID = customerID;
 		this.fillCustomerValues = fillCustomerValues;
+		this.mainCustomerFrame = mainCustomerFrame;
 
 		connectionData = new DatabaseConnection();
 
@@ -50,7 +52,7 @@ public class ChangeCustomer extends Window {
 		customerIDField = new CTextField(customerIDFieldSize);
 
 		updateValues = new UpdateDatabase(connectionData, nameField, addressField, vehicleField, customerIDField);
-		actionListener = new CustomerListener(null, null, this, updateValues);
+		actionListener = new CustomerListener(mainCustomerFrame, null, this, updateValues);
 
 		customerLabel = new CLabel(nameTextFieldSize);
 		addresslabel = new CLabel(addressTextFieldSize);

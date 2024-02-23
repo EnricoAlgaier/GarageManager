@@ -14,6 +14,7 @@ public class FillCustomerValues {
 	private CTextField idCheckField;
 	private DatabaseConnection connection;
 	private ChangeCustomer customerChangeFrame;
+	private MainCustomerFrame mainCustomerFrame;
 
 	private int customerID;
 	private boolean idValueTrue;
@@ -24,9 +25,10 @@ public class FillCustomerValues {
 	private List<String> vehicleText;
 	private List<String> customerId;
 
-	public FillCustomerValues(ChangeCustomer customerChangeFrame) {
+	public FillCustomerValues(ChangeCustomer customerChangeFrame, MainCustomerFrame mainCustomerFrame) {
 
 		this.customerChangeFrame = customerChangeFrame;
+		this.mainCustomerFrame = mainCustomerFrame;
 
 		customerText = new ArrayList<>();
 		addressText = new ArrayList<>();
@@ -81,7 +83,7 @@ public class FillCustomerValues {
 					vehicleText.add(license);
 
 
-					customerChangeFrame = new ChangeCustomer(this, String.valueOf(customerID));
+					customerChangeFrame = new ChangeCustomer(this, String.valueOf(customerID), mainCustomerFrame);
 
 				}
 			}
