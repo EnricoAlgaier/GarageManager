@@ -12,22 +12,22 @@ public class MainInterface extends Window{
 	private CButton menueButtons, loginButton;
 	private ActionListenerMain actionListener;
 	private String[] buttonName = {"Kunden", "Werkstatt", "Lager", "Mitarbeiter", "Zeiterfassung", "Beenden"};
-	private String[] loginButtonName = {"Anmelden"};
-	private String[] loginButtonID = {"login"};
+	private String[] loginButtonName = {"Datenbank", "Anmelden"};
+	private String[] loginButtonID = {"create Database", "login"};
 	
 	public MainInterface() {
 		super(weight, height, windowName);
 		
 		actionListener = new ActionListenerMain(this);
 		menueButtons = new CButton(actionListener, 6);
-		loginButton = new CButton(actionListener, 1);
+		loginButton = new CButton(actionListener, 2);
 		
 		menueButtons.createButtons(180, 80, 120, 40, 40, "posY", buttonName, buttonName);
 		for(JButton button : menueButtons.getButtons()) {
 			add(button);
 		}
 		
-		loginButton.createButtons(10, 10, 120, 40, 0, "", loginButtonID, loginButtonName);
+		loginButton.createButtons(10, 10, 120, 40, 40, "posY", loginButtonID, loginButtonName);
 		for(JButton button : loginButton.getButtons()) {
 			add(button);
 		}

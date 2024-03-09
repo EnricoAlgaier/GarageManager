@@ -10,6 +10,7 @@ public class CTextField{
 	private JPasswordField[] password;
 	private int number;
 	private List<String> fieldValue;
+	private List<String> passwordValue;
 
 	public CTextField(int number) {
 		this.number = number;
@@ -33,7 +34,7 @@ public class CTextField{
 	}
 	
 	public void createPasswordField(int posX, int posY, int weight, int height, int distance, String position) {
-		fieldValue = new ArrayList<>();
+		passwordValue = new ArrayList<>();
 		for (int create = 0; create < number; create++) {
 			password[create] = new JPasswordField();
 			password[create].setBounds(posX, posY, weight, height);
@@ -54,6 +55,15 @@ public class CTextField{
 		}
 	}
 	
+	public void passwordInput(int number) {
+		passwordValue.clear();
+		for (int index = 0; index < number; index++) {
+			char[] passwordChars = password[index].getPassword();
+	        String passwordString = new String(passwordChars);
+	        passwordValue.add(passwordString);
+		}
+	}
+	
 	public JTextField[] getFields() {
 		return fields;
 	}
@@ -64,5 +74,9 @@ public class CTextField{
 
 	public List<String> getText() {
 		return fieldValue;
+	}
+	
+	public List<String> getPassword(){
+		return passwordValue;
 	}
 }

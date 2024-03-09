@@ -1,4 +1,4 @@
-package DatabaseLogin;
+package Login;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,39 +16,39 @@ public class DatabaseLoginFrame extends Window{
 	private final static String windowName = "Anmeldung"; 
 	
 	private CButton menuButton;
-	private CTextField inputFields, passwordField;
+	private CTextField databseValue, userNameValue, passwordField;
 	private CLabel inputLabel;
 	private LoginListener loginListener;
 	private LoginInformation loginInformation;
 	
 	private String[] buttonNames = {"Login", "Abbrechen"};
 	private String[] buttonID = {"login", "cancel"};
-	private String[] labelNames = {"Datenbankname", "Benutzername", "Password"};
+	private String[] labelNames = {"Benutzername", "Password"};
 	
-	private int inputfieldSize = 2;
+	private int fieldSize = 1;
 	
 	public DatabaseLoginFrame() {
 		super(weight, height, windowName);
 		
-		inputFields = new CTextField(inputfieldSize);
-		passwordField = new CTextField(1);
-		loginInformation = new LoginInformation(inputFields);
+		userNameValue = new CTextField(fieldSize);
+		passwordField = new CTextField(fieldSize);
+		
+		loginInformation = new LoginInformation(databseValue, userNameValue, passwordField);
 		loginListener = new LoginListener(this, loginInformation);
 		
 		menuButton = new CButton(loginListener, 2);
-		inputLabel = new CLabel(3);
+		inputLabel = new CLabel(2);
 		
 		menuButton.createButtonsLogin(100, 120, 120, 40, 130, "posX", buttonID, buttonNames);
 		for(JButton buttons : menuButton.getButtons()) {
 			add(buttons);
 		}
 		
-		inputFields.createTextFields(30, 60, 100, 30, 120, "posX");
-		for(JTextField fields : inputFields.getFields()) {
+		userNameValue.createTextFields(30, 60, 100, 30,0, "");
+		for(JTextField fields : userNameValue.getFields()) {
 			add(fields);
 		}
 		
-		passwordField.createPasswordField(270, 60, 100, 30, 0, "");
 		for(JPasswordField fields : passwordField.getPasswordField()) {
 			add(fields);
 		}
@@ -61,7 +61,8 @@ public class DatabaseLoginFrame extends Window{
 		setVisible(true);
 	}
 	
-	public int getInputFieldSize() {
-		return inputfieldSize;
+	public int getFieldSize() {
+		return fieldSize;
 	}
+
 }

@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import DatabaseLogin.DatabaseLoginFrame;
-import DatabaseLogin.LoginInformation;
+import Login.DatabaseLoginFrame;
+import Login.LoginInformation;
 
 public class LoginListener implements ActionListener{
 	private DatabaseLoginFrame databaseLoginFrame;
@@ -22,7 +22,8 @@ public class LoginListener implements ActionListener{
 		String buttonID = ((JButton)e.getSource()).getActionCommand();
 		
 		if("login".equals(buttonID)) {
-			loginInformation.setDatabaseValuesInput(databaseLoginFrame.getInputFieldSize());
+			
+			loginInformation.setDatabaseValue(databaseLoginFrame.getFieldSize());
 			loginInformation.writeTxt();
 			
 		} else if("cancel".equals(buttonID)) {
